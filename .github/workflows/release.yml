@@ -24,7 +24,7 @@ jobs:
           echo "GOPATH=${HOME}/go" >> $GITHUB_ENV
           echo "PATH=${PATH}:${GOPATH}/bin" >> $GITHUB_ENV
           GO111MODULE=on go get github.com/lucor/fyne-cross/v2/cmd/fyne-cross
-          go get -u fyne.io/fyne fyne.io/fyne/cmd/fyne
+          go get fyne.io/fyne/cmd/fyne
         shell: bash
         env:
           GITHUB_REF: ${{ github.ref }}
