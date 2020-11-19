@@ -31,8 +31,8 @@ jobs:
 
       - name: build
         run: |
-          fyne package -name timer -os linux -release
-          fyne-cross widows -arch=386,amd64
+          ${GOPATH}/bin/fyne package -name timer -os linux -release
+          ${GOPATH}/bin/fyne-cross widows -arch=386,amd64
           # others
           mkdir build
           cp fyne-cross/dist/windows-amd64/timer.exe.zip build/timer.windows.amd64.exe.zip
