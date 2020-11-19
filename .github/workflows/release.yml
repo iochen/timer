@@ -24,20 +24,19 @@ jobs:
           echo "GOPATH=${HOME}/go" >> $GITHUB_ENV
           echo "PATH=${PATH}:${GOPATH}/bin" >> $GITHUB_ENV
           GO111MODULE=on go get github.com/lucor/fyne-cross/v2/cmd/fyne-cross
-          go get fyne.io/fyne/cmd/fyne
         shell: bash
         env:
           GITHUB_REF: ${{ github.ref }}
 
       - name: build
         run: |
-          ${GOPATH}/bin/fyne package -name timer -os linux -release
-          ${GOPATH}/bin/fyne-cross widows -arch=386,amd64
+          ${GOPATH}/bin/fyne-cross windows -arch=386,amd64
+          # ${GOPATH}/bin/fyne-cross linux -arch=386,amd64
           # others
           mkdir build
           cp fyne-cross/dist/windows-amd64/timer.exe.zip build/timer.windows.amd64.exe.zip
           cp fyne-cross/dist/windows-386/timer.exe.zip build/timer.windows.386.exe.zip
-          cp timer.tar.gz build/timer.linux.tar.gz
+
 
       - name: release
         uses: softprops/action-gh-release@v1
@@ -46,6 +45,6 @@ jobs:
           files: |
             build/timer.windows.386.exe.zip
             build/timer.windows.amd64.exe.zip
-            build/timer.linux.tar.gz
+            # build/timer.linux.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
