@@ -20,10 +20,9 @@ jobs:
 
       - name: prepare
         run: |
-          export GOPATH=$HOME/go
-          export GOBIN=$(go env GOPATH)/bin
-          export PATH=$PATH:$GOPATH
-          export PATH=$PATH:$GOBIN
+          mkdir go
+          echo "GOPATH=${HOME}/go" >> $GITHUB_ENV
+          echo "PATH=${PATH}:${GOPATH}/bin" >> $GITHUB_ENV
           GO111MODULE=on go get github.com/lucor/fyne-cross/v2/cmd/fyne-cross
           go get -u fyne.io/fyne fyne.io/fyne/cmd/fyne
         shell: bash
